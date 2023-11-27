@@ -1,0 +1,27 @@
+@import '~bootstrap/scss/bootstrap';
+
+.form {
+    background-color: #FFFFFF;
+    min-height: 100vh;
+}
+
+.form_field {
+    border-radius: 15px;
+    background-color: darkgrey;
+    margin: 5% 10%;
+    padding: 30px;
+
+    @media (max-width: 320px) {
+        margin: 2% 5%;
+        padding: 15px;
+    }
+
+    @media (min-width: 700px) {
+        min-width: 600px;
+    }
+}
+
+.form_zip_button {
+    border-top-right-radius: 10% !important;
+    border-bottom-right-radius: 10% !important;
+}

@@ -1,0 +1,31 @@
+@import '~bootstrap/scss/bootstrap';
+
+.whatsapp_button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: transparent;
+    border: none;
+    z-index: 10;
+
+    @media (max-width: 1040px) {
+        bottom: 0.5rem;
+    }
+
+    @media (max-width: 622px) {
+        bottom: 2rem;
+    }
+
+    @media (max-width: 520px) {
+        bottom: 0.5rem;
+        right: 0.5rem;
+    }
+}
+
+.whatsapp_icon {
+    font-size: 70px;
+
+    @media (max-width: 1200px) {
+        font-size: 40px;
+    }    
+}

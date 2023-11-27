@@ -1,0 +1,94 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit&display=swap');
+
+//elements css
+.footer {
+    background-color: #0B0D0F;
+    color: white;
+    width: 100%;
+
+    @media (max-width: 150px) {
+        font-size: 12px;
+        word-break: break-all;
+    }
+}
+
+.footer_my_tooltip {
+    background-color: white;
+    padding: 5px 16px !important;
+    border-radius: 20%;
+}
+
+.footer_left_div {
+    gap: 10px 0;
+}
+
+//splits info and Google maps div in half
+.footer_divide {
+    width: 50%;
+
+    @media (max-width: 992px) {
+        width: 100%;
+    }
+}
+
+.footer_line_gap {
+    row-gap: 15px;
+}
+
+.footer_margim {
+    padding: 40px 30px;
+}
+
+.footer_social_media_div {
+    height: 25.5px;
+    gap: 0 20px;
+}
+
+.footer_mail {
+    @media (max-width: 270px) {
+        word-break: break-all;
+    }
+}
+
+.footer_icon_gap {
+    column-gap: 15px;
+}
+
+.footer_google {
+    margin-left: 5px;
+    font-family: 'Outfit', sans-serif !important;
+    font-size: large;
+}
+
+.footer_phone_gap {
+    column-gap: 20px;
+}
+
+.footer_google_maps {
+    width: 350px;
+    aspect-ratio: 1/1;
+    max-height: 90vh;
+
+    @media (max-width: 440px) {
+        width: 100%;
+        aspect-ratio: 1/1;
+    }
+}
+
+.footer_dev {
+    background-color: black;
+    flex-grow: 1;
+    font-size: 13px;
+    padding: 10px 0;
+    cursor: url('../img/hehe.svg'), auto;
+
+    @media (max-width: 150px) {
+        font-size: 8px;
+        word-break: break-all;
+    }
+}
+
+.footer_dev:hover {
+    text-decoration: underline;
+}

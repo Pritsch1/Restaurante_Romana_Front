@@ -1,0 +1,52 @@
+@import '~bootstrap/scss/bootstrap';
+
+//elemets css
+.navbar_logo {
+    width: 120px;
+
+    @media (max-width: 600px) {
+        width: 90px;
+    }
+
+    @media (max-width: 260px) {
+        width: 60px;
+    }
+}
+
+.navbar_collapse {
+    @media (max-width: 1500px) {
+        margin-right: 10%;
+    }
+
+    @media (max-width: 991px) {
+        margin-right: 0%;
+    }
+}
+
+.navbar_toggle {
+    @media (max-width: 80px) {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+.navbar_google_maps {
+    margin-left: 5px;
+}
+
+.navbar_waze_maps {
+    margin-left: 9px;
+}
+
+.navbar_apple_maps {
+    margin-left: 6px;
+    margin-top: 2px;
+}
+
+.navbar_icons {
+    margin-left: 17px;
+
+    @media (max-width: 991px) {
+        margin-left: 0px;
+    }
+}

@@ -1,0 +1,119 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit&family=Playfair+Display:wght@700&display=swap');
+
+.home {
+    min-height: 100vh;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.home h1, h2 {
+    color: #fb8b24 !important;
+    font-family: 'Playfair Display',Helvetica, Arial, sans-serif;
+}
+
+.home_divide {
+    width: 50%;
+
+    @media (max-width: 992px) {
+        width: 100%;
+    }
+}
+
+.home_carousel {
+    padding: 20px;    
+
+    @media (max-width: 600px) {
+        padding: 5px;
+    }
+}
+
+.home_carousel_2 {
+    padding: 5px;
+}
+
+.home_text_margins {
+    padding: 20px;
+    gap: 15px 0;
+}
+
+.home_imgsize {
+    border-radius: 5%;
+    max-width: 100%;
+    max-height: 90vh;
+}
+
+.home_black {
+    background-color: black;
+    color: white;    
+}
+
+.home_white {
+    background-color: #F8F8FF !important;
+}
+
+.home_google_maps {
+    width: 100%;
+    height: 100%;
+}
+
+.home_set_iframe {
+    height: 600px;
+    max-height: 90vh;
+
+    @media (max-width: 400px) {
+        height: auto !important;
+        aspect-ratio: 1/1;
+        background-color: white;
+    }
+
+    @media (max-width: 992px) {
+        height: 400px;
+    }
+}
+
+.home_whatsapp {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.home_swap > div:nth-child(2) {
+    @media (max-width: 992px) {
+        order: -1;
+    }
+}
+
+.home_contrast_link {
+    color: #F5DEB3 !important;
+}
+
+.home_contrast_link:hover {
+    color: #c1853b !important;
+}
+
+.home_links {
+    text-decoration: none;
+    font-family: monospace, Helvetica, Arial, sans-serif;
+    border: solid;
+    width: min-content;
+    border-color: #F5DEB3;
+    padding: 10px 20px;
+    color: #c1853b;
+    font-size: 20px;
+    border-radius: 2%;
+    transition: 0.2s;
+    //nicer transition
+    //https://stackoverflow.com/questions/9476923/css3-animate-border-color
+}
+
+.home_links:hover {
+    border-color: #c1853b;
+    color: #F5DEB3;
+}
+
+.home_top_15 {
+    margin-top: 15px;
+}
+
+.home_bottom_15 {
+    margin-bottom: 15px;
+}

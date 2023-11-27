@@ -1,0 +1,85 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit&family=Playfair+Display&family=Ubuntu+Mono&display=swap');
+
+.flex {
+    display: flex;
+}
+
+.flexcol {
+    flex-direction: column;
+}
+
+.flexrow {
+    flex-direction: row;
+}
+
+.flex_x_center {
+    justify-content: center;
+}
+
+.flex_y_center {
+    align-items: center;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.ratio_1_1 {
+    aspect-ratio: 1/1;
+}
+
+.flex1 {
+    flex: 1;
+}
+
+//Global css
+.links {
+    color: #c1853b;
+    text-decoration: none;
+    font-family: monospace, Helvetica, Arial, sans-serif;
+}
+
+.links:hover {
+    color: #F5DEB3;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+//Form Status
+
+.success_white {
+    color: white !important;
+}
+
+.status_family {
+    font-family: 'Ubuntu Mono',Helvetica, Arial, sans-serif !important;
+}
+
+.success_header {
+    font-size: 20px !important;
+}
+
+.success_body {
+    font-size: 16px !important;
+}
+
+//form input
+
+.input_family {
+    font-family: 'Monospac821 BT', Arial, sans-serif !important;
+    font-weight: 600 !important;
+}
+
+.input_family::placeholder {
+    font-family: Helvetica, Arial, sans-serif !important;
+    font-weight: 300;
+}
+
+.forms_title {
+    font-family: 'Monospac821 BT', Arial, sans-serif !important;
+    font-size: 24px;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}

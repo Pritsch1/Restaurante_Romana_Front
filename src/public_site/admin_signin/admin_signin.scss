@@ -1,0 +1,30 @@
+@import '~bootstrap/scss/bootstrap';
+
+.admin_signin_color {
+    background-color: #0B0D0F;
+    min-height: 100vh;
+}
+
+.admin_signin {
+    padding: 60px 20px 20px 20px;
+}
+
+.admin_signin_button {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.admin_signin_form {
+    background-color: #27292b;
+    padding: 10px;
+    border-radius: 2%;
+}
+
+.admin_signin_text {
+    color: white;
+}
+
+.admin_signin_accordion {
+    margin-bottom: 20px;
+    max-width: 231px;
+}
