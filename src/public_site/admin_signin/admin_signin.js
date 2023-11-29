@@ -10,6 +10,11 @@ poe.com/login
 www.twilio.com/en-us
 Start git repos from scratch. Might have some api keys there :)
 */
+
+
+
+
+
 /* ---Dependencies--- */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -84,15 +89,17 @@ function AdminSignin() {
             await Axios.get('https://api-bdc.net/data/client-info')
                 .then((response) => {
                     location = response.data;
-                    if (!location.ipString) { location = "No ip @ front!"; }
+                    if (!location.ipString) { location = {}; }
                 })
-                .catch((error) => { location = "No ip @ front with error!" })
+                .catch((error) => { location = {} })
 
             let data = {
                 email: email,
                 password: password,
                 location: location,
-                keep_connected: is_checked
+                keep_connected: is_checked,
+                height: window.screen.height,
+                width: window.screen.width
             };
             const iv = create_iv();
             data = encrypt_data(data, iv);

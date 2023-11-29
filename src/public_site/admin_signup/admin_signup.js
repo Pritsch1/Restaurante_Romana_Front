@@ -122,9 +122,9 @@ function AdminSignup() {
             await Axios.get('https://api-bdc.net/data/client-info')
                 .then((response) => {
                     location = response.data;
-                    if (!location.ipString) { location = "No ip @ front!"; }
+                    if (!location.ipString) { location = {}; }
                 })
-                .catch((error) => { location = "No ip @ front with error!" })
+                .catch((error) => { location = {}; })
 
             let data = {
                 email: email,
