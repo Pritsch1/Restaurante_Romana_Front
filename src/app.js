@@ -12,6 +12,9 @@ import AdminSignin from './public_site/admin_signin/admin_signin.js';
 import AdminSignup from './public_site/admin_signup/admin_signup.js';
 import Protect from './admin/protect.js';
 import Orders from './admin/orders/orders.js';
+import Orders1 from './admin/orders/orders1.js';
+import Orders2 from './admin/orders/orders2.js';
+import Orders3 from './admin/orders/orders3.js';
 
 function Layout({ children }) {
     const location = useLocation();
@@ -47,7 +50,10 @@ function App() {
                     <Route path="/adm_signup" element={<Layout2> <AdminSignup /> </Layout2>} exact={true} />
                     <Route path="/adm_signin" element={<Layout2> <AdminSignin /> </Layout2>} exact={true} />
                     <Route element={<Protect />}>
-                        <Route path="/pedidos" element={<Orders />} exact={true} />    
+                        <Route path="/pedidos" element={<Orders />} exact={true} />
+                        <Route path="/pedidos1" element={<Orders1 />} exact={true} />
+                        <Route path="/pedidos2" element={<Orders2 />} exact={true} />
+                        <Route path="/pedidos3" element={<Orders3 />} exact={true} />
                     </Route>
                     {/* Add a catch-all or error route here */}
                     {/*<Route path="*" element={<Error404 />} />*/}

@@ -117,6 +117,7 @@ function AdminSignin() {
           }})
                 .then((response) => {
                     console.log("response: ", response.data);
+                    navigate("/pedidos");
                 })
                 .catch((error) => {
                     if (error.response && error.response.data) {
@@ -125,10 +126,6 @@ function AdminSignin() {
                         console.log("front: " + error.message);
                     }
                  });
-        }
-
-        if (1 === 2) {
-            navigate("/");
         }
     };
 

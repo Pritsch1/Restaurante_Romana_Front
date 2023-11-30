@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './orders.scss'
 
-function Orders() {
+
+function Orders2() {
     return (
         <div>
             <a href="/pedidos">Order</a>
@@ -12,4 +13,4 @@ function Orders() {
     );
 }
 
-export default Orders;
+export default Orders2;
