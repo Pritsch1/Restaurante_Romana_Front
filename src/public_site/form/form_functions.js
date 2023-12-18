@@ -21,7 +21,7 @@ export function count_digits(e) {
     value_inputed = e.target.value;
     value_inputed = copy_only_numbers(value_inputed);
     value_inputed_length = value_inputed.length;
-    console.log(value_inputed_length);
+    //console.log(value_inputed_length);
     return value_inputed_length;
 }
 

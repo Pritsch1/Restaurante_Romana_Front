@@ -33,6 +33,26 @@
     flex: 1;
 }
 
+.gap10 {
+    gap: 10px;
+}
+
+.gap20 {
+    gap: 20px;
+}
+
+.gap30 {
+    gap: 30px;
+}
+
+.gap40 {
+    gap: 40px;
+}
+
+.gap50 {
+    gap: 50px;
+}
+
 //Global css
 .links {
     color: #c1853b;
@@ -82,4 +102,24 @@
     color: black;
     font-weight: 700;
     text-align: center;
+}
+
+.loading_box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: rgba(169, 169, 169, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.loading_box_black {
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: white;
+}
+
+.loading_text {
+    margin-top: 5px;
 }

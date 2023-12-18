@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-//My components
+/* ---Public Pages--- */
 import NavBar from './public_site/navbar/navbar.js';
 import Footer from './public_site/footer/footer.js';
 import Whatsapp from './unique/whatsapp/whatsapp.js';
@@ -10,13 +10,13 @@ import ContactFormPage from './public_site/contact/contact.js';
 import MenuPage from './public_site/prices/prices.js';
 import AdminSignin from './public_site/admin_signin/admin_signin.js';
 import AdminSignup from './public_site/admin_signup/admin_signup.js';
+/* ---Protects--- */
 import Protect from './admin/protect.js';
+/* ---admin--- */
 import Orders from './admin/orders/orders.js';
-import Orders1 from './admin/orders/orders1.js';
-import Orders2 from './admin/orders/orders2.js';
-import Orders3 from './admin/orders/orders3.js';
+import DailyMenu from './admin/menu/daily_menu.js';
 
-function Layout({ children }) {
+function Public({ children }) {
     const location = useLocation();
 
     return (
@@ -29,7 +29,7 @@ function Layout({ children }) {
     );
 }
 
-function Layout2({ children }) {
+function AdminPublic({ children }) {
     return (
         <div>
             <NavBar />
@@ -43,17 +43,15 @@ function App() {
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Layout>           <HomePage /> </Layout>} exact={true} />
-                    <Route path="/coletivas" element={<Layout>  <FormPage /> </Layout>} exact={true} />
-                    <Route path="/contato" element={<Layout>    <ContactFormPage /> </Layout>} exact={true} />
-                    <Route path="/valores" element={<Layout>    <MenuPage /> </Layout>} exact={true} />
-                    <Route path="/adm_signup" element={<Layout2> <AdminSignup /> </Layout2>} exact={true} />
-                    <Route path="/adm_signin" element={<Layout2> <AdminSignin /> </Layout2>} exact={true} />
+                    <Route path="/" element={<Public>           <HomePage /> </Public>} exact={true} />
+                    <Route path="/coletivas" element={<Public>  <FormPage /> </Public>} exact={true} />
+                    <Route path="/contato" element={<Public>    <ContactFormPage /> </Public>} exact={true} />
+                    <Route path="/valores" element={<Public>    <MenuPage /> </Public>} exact={true} />
+                    <Route path="/adm_signup" element={<AdminPublic> <AdminSignup /> </AdminPublic>} exact={true} />
+                    <Route path="/adm_signin" element={<AdminPublic> <AdminSignin /> </AdminPublic>} exact={true} />
                     <Route element={<Protect />}>
                         <Route path="/pedidos" element={<Orders />} exact={true} />
-                        <Route path="/pedidos1" element={<Orders1 />} exact={true} />
-                        <Route path="/pedidos2" element={<Orders2 />} exact={true} />
-                        <Route path="/pedidos3" element={<Orders3 />} exact={true} />
+                        <Route path="/menu" element={<DailyMenu />} exact={true} />
                     </Route>
                     {/* Add a catch-all or error route here */}
                     {/*<Route path="*" element={<Error404 />} />*/}

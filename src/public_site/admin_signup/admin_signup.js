@@ -4,12 +4,14 @@ import zxcvbn from 'zxcvbn';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import validator from 'validator';
-import { useNavigate } from 'react-router-dom';
 /* ---Bootstrap--- */
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
+import Spinner from 'react-bootstrap/Spinner';
 /* ---My Files--- */
 import './admin_signup.scss'
 import { create_iv, encrypt_data } from '../../unique/crypto';
@@ -18,7 +20,9 @@ const NODE_ENV = process.env.NODE_ENV;
 const LOCAL_URL = process.env.REACT_APP_LOCAL_URL;
 
 function AdminSignup() {
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [account_created, set_account_created] = useState(false);
+    const [signup_button, set_signup_button] = useState("Criar Conta");
     /* ---input field values--- */
     const [email, set_email] = useState("");
     const [password, set_password] = useState("");
@@ -97,14 +101,14 @@ function AdminSignup() {
             if (e.length < 11 && validated === true) { set_phone_validity(false); set_phone_invalidity(true); }
             else if (e.length >= 11 && validated === true) { set_phone_validity(true); set_phone_invalidity(false); }
         }
-    /*--------------------------------------------------------------------------------------------------------------------*/
+        /*--------------------------------------------------------------------------------------------------------------------*/
 
         validate_email(email);
         validate_password_strength(password);
         validate_phone(phone);
         validate_password_copy(password2);
     }, [email, password, password2, phone, validated]);
-    
+
     /* ---onSubmit--- */
     async function handleSignin(event) {
         event.preventDefault(); //disable onSubmit redirect
@@ -119,6 +123,10 @@ function AdminSignup() {
         //if (phone.length < 11) { set_phone_validity(true); set_phone_invalidity(true); }
 
         if (password_strength >= 80 && validator.isEmail(email) === true && password === password2 && phone.length > 10) {
+
+            setLoading(true);
+            set_signup_button(<Spinner size="sm" animation="border" />);
+
             await Axios.get('https://api-bdc.net/data/client-info')
                 .then((response) => {
                     location = response.data;
@@ -151,13 +159,18 @@ function AdminSignup() {
                     }
                 })
                 .then((response) => {
-                    console.log("response: ", response.data);
+                    //console.log("response: ", response.data);
+                    setLoading(false);
+                    set_signup_button("Criar Conta");
+                    set_account_created(true);
                 })
                 .catch((error) => {
+                    setLoading(false);
+                    set_signup_button("Criar Conta");
                     if (error.response && error.response.data) {
-                        console.log("server: " + error.response.data);
+                        //console.log("server: " + error.response.data);
                     } else {
-                        console.log("front: " + error.message);
+                        //console.log("front: " + error.message);
                     }
                 });
         }
@@ -165,64 +178,92 @@ function AdminSignup() {
 
     return (
         <div className="admin_signup_color flex flex_x_center flex_y_center">
-            <div className="admin_signup_form">
 
-                <Accordion className="admin_signup_accordion">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Restaurante Romana</Accordion.Header>
-                        <Accordion.Body>
-                            Este sistema &#233; destinado para opera&#231;&#245;es do restaurante.
-                            Em caso de d&#250;vidas, bugs ou sugest&#245;es informe
-                            a Romana e ela encaminha para o desenvolvedor.
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
+            {account_created ? (
+                <ToastContainer
+                    className="p-3"
+                    position="middle-center"
+                    style={{ zIndex: 1 }}
+                >
+                    <Toast bg="success">
+                        <Toast.Header closeButton={false}>
+                            <strong className="me-auto">Conta Criada</strong>
+                            <small>Aguardando Confirma&#231;&#227;o</small>
+                        </Toast.Header>
+                        <Toast.Body className="admin_signup_toast">Por favor aguarde o administrador de sistema fazer a libera&#231;&#227;o do seu acesso.</Toast.Body>
+                    </Toast>
+                </ToastContainer>
+            ) : (
+                <div className="admin_signup_form">
 
-                <Form noValidate onSubmit={handleSignin}>
+                    {/* Loading Spinner */}
+                    {loading && (
+                        <div className="loading_box">
+                            <div className="flex flex_x_center">
+                                <Spinner animation="border" variant="success" role="status" />
+                            </div>
+                            <div className="loading_text">Loading...</div>
+                        </div>
+                    )}
 
-                    {/* Email */}
-                    <Form.Floating className="mb-3">
-                        <Form.Control isValid={email_validity} isInvalid={email_invalidity} type="email" placeholder="" required
-                            onChange={(e) => { set_email(e.target.value); }} />
-                        <Form.Control.Feedback type="invalid">Formato Invalido</Form.Control.Feedback>
-                        <label>Email</label>
-                    </Form.Floating>
+                    <Accordion className="admin_signup_accordion">
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>Restaurante Romana</Accordion.Header>
+                            <Accordion.Body>
+                                Este sistema &#233; destinado para opera&#231;&#245;es do restaurante.
+                                Em caso de d&#250;vidas, bugs ou sugest&#245;es informe
+                                a Romana e ela encaminha para o desenvolvedor.
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
 
-                    {/* Password */}
-                    <Form.Floating className="mb-3">
-                        <Form.Control isValid={password_validity} isInvalid={password_invalidity} type={show_password} placeholder="" autoComplete="new-password" required
-                            onChange={(e) => { set_password(e.target.value); }} />
-                        <label className="">Senha</label>
-                        <Form.Control.Feedback type="invalid">Senha Muito Fraca!</Form.Control.Feedback>
-                    </Form.Floating>
+                    <Form noValidate onSubmit={handleSignin}>
 
-                    <Form.Floating className="mb-3">
-                        <Form.Control isValid={password2_validity} isInvalid={password2_invalidity} type={show_password} autoComplete="new-password" placeholder="" required
-                            onChange={(e) => { set_password2(e.target.value); }} />
-                        <Form.Control.Feedback type="invalid">As senhas s&#227;o diferentes.</Form.Control.Feedback>
-                        <label>Repetir Senha</label>
-                    </Form.Floating>
+                        {/* Email */}
+                        <Form.Floating className="mb-3">
+                            <Form.Control isValid={email_validity} isInvalid={email_invalidity} type="email" placeholder="" required
+                                onChange={(e) => { set_email(e.target.value); }} />
+                            <Form.Control.Feedback type="invalid">Formato Invalido</Form.Control.Feedback>
+                            <label>Email</label>
+                        </Form.Floating>
 
-                    <div>
-                        <Form.Check className="admin_signup_text" id="keep_connection_form" aria-label="option 1" label="Revelar Senha" onChange={reveal_password} checked={is_checked} />
-                        <div className="admin_signup_text" >For&#231;a da Senha:</div>
-                        <div className="admin_signup_pass_bar"><ProgressBar variant={password_strength_color} now={password_strength} /></div>
-                    </div>
+                        {/* Password */}
+                        <Form.Floating className="mb-3">
+                            <Form.Control isValid={password_validity} isInvalid={password_invalidity} type={show_password} placeholder="" autoComplete="new-password" required
+                                onChange={(e) => { set_password(e.target.value); }} />
+                            <label className="">Senha</label>
+                            <Form.Control.Feedback type="invalid">Senha Muito Fraca!</Form.Control.Feedback>
+                        </Form.Floating>
 
-                    {/* Phone */}
-                    <Form.Floating className="mb-3">
-                        <Form.Control isValid={phone_validity} isInvalid={phone_invalidity} placeholder="" inputMode="numeric" required
-                            onChange={(e) => { set_phone(e.target.value); }} />
-                        <Form.Control.Feedback type="invalid">Telefone invalido.</Form.Control.Feedback>
-                        <label>Telefone</label>
-                    </Form.Floating>
+                        <Form.Floating className="mb-3">
+                            <Form.Control isValid={password2_validity} isInvalid={password2_invalidity} type={show_password} autoComplete="new-password" placeholder="" required
+                                onChange={(e) => { set_password2(e.target.value); }} />
+                            <Form.Control.Feedback type="invalid">As senhas s&#227;o diferentes.</Form.Control.Feedback>
+                            <label>Repetir Senha</label>
+                        </Form.Floating>
 
-                        <Button className="admin_signup_button" variant="primary" type="submit">Criar Conta</Button>
+                        <div>
+                            <Form.Check className="admin_signup_text" id="reveal_password" aria-label="option 1" label="Revelar Senha" onChange={reveal_password} checked={is_checked} />
+                            <div className="admin_signup_text" >For&#231;a da Senha:</div>
+                            <div className="admin_signup_pass_bar"><ProgressBar variant={password_strength_color} now={password_strength} /></div>
+                        </div>
+
+                        {/* Phone */}
+                        <Form.Floating className="mb-3">
+                            <Form.Control isValid={phone_validity} isInvalid={phone_invalidity} placeholder="" inputMode="numeric" required
+                                onChange={(e) => { set_phone(e.target.value); }} />
+                            <Form.Control.Feedback type="invalid">Telefone invalido.</Form.Control.Feedback>
+                            <label>Telefone</label>
+                        </Form.Floating>
+
+                        <Button className="admin_signup_button" variant="primary" type="submit">{signup_button}</Button>
 
                         <a href="/adm_signin" className="links">J&#225; Tenho Uma Conta.</a>
 
-                </Form>
-            </div>
+                    </Form>
+                </div>
+            )}
+
         </div>
     );
 }

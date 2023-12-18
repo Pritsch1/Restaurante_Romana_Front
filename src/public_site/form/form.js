@@ -18,6 +18,8 @@ const NODE_ENV = process.env.NODE_ENV;
 const LOCAL_URL = process.env.REACT_APP_LOCAL_URL;
 
 function FormFunc() {
+    /* ---Loading Box--- */
+    const [loading, setLoading] = useState(false);
     //form validation
     const [validated, setValidated] = useState(false);
     /* Form Toast-------- */
@@ -52,7 +54,7 @@ function FormFunc() {
             setshowZIPShort(true);
         } else {
             fetch(`https://viacep.com.br/ws/${zip_value}/json/`).then((response) => response.json().then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.logradouro !== undefined || data.localidade !== undefined || data.uf !== undefined) {
                     document.getElementById('form_street').value = data.logradouro;
                     setStreet(data.logradouro);
@@ -63,7 +65,10 @@ function FormFunc() {
                 } else {
                     setShowZIPError(true);
                 }
-            })).catch((error) => { console.log(error); setShowZIPError(true); });
+            })).catch((error) => {
+                //console.log(error); 
+                setShowZIPError(true); 
+            });
         }
         setTimeout(() => { setzipButton("Buscar"); }, 500);
     }
@@ -98,14 +103,17 @@ function FormFunc() {
                 message: message,
             };
 
+            /* --- Loading FeedBack--- */
             setsendButton(<div><Spinner size="sm" animation="border" /> Enviando...</div>);
+            setLoading(true);
 
             const baseURL = NODE_ENV === 'production' ? '' : LOCAL_URL;
 
             Axios.post(`${baseURL}/forms/send_form`, data)
                 .then((res) => {
                     if (res.status === 200) {
-                        console.log("200");
+                        //console.log("200");
+                        setLoading(false);
                         setsendButton("Enviado!");
                         setZip("");
                         setStreet("");
@@ -123,7 +131,8 @@ function FormFunc() {
                     }
                 }
                 ).catch((error) => {
-                    console.log(error.request.status);
+                    //console.log(error.request.status);
+                    setLoading(false);
                     setsendButton("Enviar");
                     set_error_status(error.request.status);
                     setShowHTTPError(true);
@@ -137,6 +146,16 @@ function FormFunc() {
     
     return (
         <div className="form flex flexcol flex_x_center flex_y_center">
+            {/* Loading Spinner */}
+            {loading && (
+                <div className="loading_box loading_box_black">
+                    <div className="flex flex_x_center">
+                        <Spinner animation="border" variant="success" role="status" />
+                    </div>
+                    <div className='loading_text'>Loading...</div>
+                </div>
+            )}
+
             {/* Form Toast---- */}
             {/* Success */}
             <ToastContainer className="position-fixed" position="top-end" style={{ zIndex: 1000 }}>

@@ -1,6 +1,6 @@
 /* ---Dependencies--- */
 import Axios from 'axios';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 /* ---envs--- */
@@ -9,6 +9,8 @@ const LOCAL_URL = process.env.REACT_APP_LOCAL_URL;
 
 const Protect = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const location = useLocation();
+    sessionStorage.setItem("path", location.pathname);
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -38,9 +40,12 @@ const Protect = () => {
 
     if (isAuthenticated === null) {
         return (
-            <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
+            <div className="loading_box">
+                <div className="flex flex_x_center">
+                    <Spinner animation="border" variant="success" role="status" />
+                </div>
+                <div className="loading_text">Loading...</div>
+            </div>
         );
     }
 

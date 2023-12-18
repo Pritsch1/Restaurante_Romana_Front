@@ -17,6 +17,8 @@ const NODE_ENV = process.env.NODE_ENV;
 const LOCAL_URL = process.env.REACT_APP_LOCAL_URL;
 
 function ContactFormFunc() {
+    /* ---Loading Box--- */
+    const [loading, setLoading] = useState(false);
     //form validation
     const [validated, setValidated] = useState(false);
 
@@ -55,14 +57,17 @@ function ContactFormFunc() {
                 message: message,
             };
 
+            /* --- Loading FeedBack--- */
             setsendButton(<div><Spinner size="sm" animation="border" /> Enviando...</div>);
+            setLoading(true);
 
             const baseURL = NODE_ENV === 'production' ? '' : LOCAL_URL;
 
             Axios.post(`${baseURL}/forms/contact_send_form`, data) //http://localhost:1 const baseURL = NODE_ENV === 'production' ? '' : LOCAL_URL;
                 .then((res) => {
                     if (res.status === 200) {
-                        console.log("200");
+                        //console.log("200");
+                        setLoading(false);
                         setsendButton("Enviado!");
                         setName("");
                         setEmail("");
@@ -73,8 +78,9 @@ function ContactFormFunc() {
                 }
                 )
                 .catch((error) => {
-                    console.log(error.request.status);
+                    //console.log(error.request.status);
                     setsendButton("Enviar");
+                    setLoading(false);
                     set_error_status(error.request.status);
                     setShowError(true);
                 }
@@ -88,6 +94,16 @@ function ContactFormFunc() {
 
     return (
         <div className="form flex flexcol flex_x_center flex_y_center">
+            {/* Loading Spinner */}
+            {loading && (
+                <div className="loading_box loading_box_black">
+                    <div className="flex flex_x_center">
+                        <Spinner animation="border" variant="success" role="status" />
+                    </div>
+                    <div className='loading_text'>Loading...</div>
+                </div>
+            )}
+
             {/* Form Toast---- */}
             {/* Success */}
             <ToastContainer className="position-fixed" position="top-end" style={{ zIndex: 1000 }}>
