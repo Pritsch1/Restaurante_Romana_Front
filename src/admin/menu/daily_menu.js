@@ -30,11 +30,11 @@ function DailyMenu() {
     /* ---DataBase Items--- */
     const [db_side, set_db_side] = useState([]);
     const [db_main, set_db_main] = useState([]);
-    const [db_bread, set_db_bread] = useState(["TECARAICHOVA"]);
+    const [db_bread, set_db_bread] = useState([]);
     /* ---Holds the values typed by the user at the input fields--- */
     const [sides, set_sides] = useState(["", "", "", "", ""]);
     const [mains, set_mains] = useState(["", "", "", "", "", "", "", ""]);
-    const [bread, set_bread] = useState(["aaa"]);
+    const [bread, set_bread] = useState([""]);
 
     /* ---Get Menu From Db--- */
     useEffect(() => {
@@ -60,6 +60,7 @@ function DailyMenu() {
                             return [...prev, side[i]];
                         });
                     }
+                    set_db_bread(["adasd"])
                 }
             })
             .catch((error) => {
@@ -69,9 +70,22 @@ function DailyMenu() {
 
     /* ---Makes the new focused input empty--- */
     useEffect(() => {
-        if (focused_input[0] !== null) {
+        /*if (focused_input[0] !== null) {
             document.getElementById(focused_input[0]).focus();
+        }*/
+        if (focused_input[0] !== null) {
+            const focusedElement = document.getElementById(focused_input[0]);
+
+            if (focusedElement) {
+                focusedElement.focus();
+
+                focusedElement.scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center'
+                });
+            }
         }
+
     }, [focused_input, sides, mains]);
 
     function change_focus(id) {
@@ -221,6 +235,7 @@ function DailyMenu() {
                                 record_input(e.target.value, index, inputed_values, dish_type);
                             }}
                             onKeyDown={(e) => {
+                                set_focused_input([`${dish_type}${index}`, index])
                                 if ((e.nativeEvent.code === "ArrowDown" || e.nativeEvent.code === "Tab") && dropdown_item_rendered) {
                                     e.preventDefault();
                                     change_focus(`dropdown_id${dish_type}${0}`);
@@ -230,6 +245,7 @@ function DailyMenu() {
                                     set_focused_input([`${dish_type}${index + 1}`, index + 1])
                                 }*/
                             }}
+                            onKeyUp={() => set_focused_input([`${dish_type}${index}`, index]) }
                         />
                         <Button onClick={() => record_input("", index, inputed_values, dish_type)} variant="danger">X</Button>
                     </InputGroup>

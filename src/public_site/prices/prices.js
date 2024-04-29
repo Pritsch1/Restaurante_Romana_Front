@@ -43,9 +43,9 @@ function Menu() {
                             {/* buffet info */}
                             <div className="menu_sub_header">Buffet</div>
                             <div className="flex flexcol menu_itens_gap">
-                                <div>Livre: R$ 22,00</div>
-                                <div>Livre aos S&#225;bados: R$ 24,00</div>
-                                <div>Quilo: R$ 48,00</div>
+                                <div>Livre: R$ 24,00</div>
+                                <div>Livre aos S&#225;bados: R$ 25,00</div>
+                                <div>Quilo: R$ 49,00</div>
                             </div>
                             {/* to go info */}
                             <div className="flex flexcol menu_itens_gap">
@@ -54,9 +54,9 @@ function Menu() {
                                     <Icon className="home_togo_info" icon="gridicons:info-outline"
                                         onClick={(e) => { handleClick(e, 1); }} />
                                 </div>
-                                <div>Grande: R$ 18,00</div>
-                                <div>M&#233;dia: R$ 17,00</div>
-                                <div>Montar Salada: R$ 2,00
+                                <div>Grande: R$ 19,00</div>
+                                <div>M&#233;dia: R$ 18,00</div>
+                                <div>Montar Salada: R$ 3,00
                                     <Icon className="home_togo_info2" icon="gridicons:info-outline"
                                         onClick={(e) => { handleClick(e, 2); }} />
                                 </div>
@@ -73,23 +73,23 @@ function Menu() {
                                 {/* protein portion */}
                                 <div className="flex flexcol menu_itens_gap">
                                     <div className="menu_sub_sub_header">Carne</div>
-                                    <div>Grande: R$ 25,00 (500g)</div>
-                                    <div>M&#233;dia: R$ 20,00 (400g)</div>
-                                    <div>Pequena R$ 10,00 (200g)</div>
+                                    <div>Grande: R$ 25,50 (500g)</div>
+                                    <div>M&#233;dia: R$ 20,50 (400g)</div>
+                                    <div>Pequena R$ 10,50 (200g)</div>
                                 </div>
                                 {/* main portion */}
                                 <div className="flex flexcol menu_itens_gap">
                                     <div className="menu_sub_sub_header">Guarni&#231;&#227;o</div>
-                                    <div>Grande: R$ 14,00</div>
-                                    <div>M&#233;dia: R$ 10,00</div>
-                                    <div>Pequena R$ 5,00</div>
+                                    <div>Grande: R$ 14,50</div>
+                                    <div>M&#233;dia: R$ 10,50</div>
+                                    <div>Pequena R$ 5,50</div>
                                 </div>
                                 {/* salat portion */}
                                 <div className="flex flexcol menu_itens_gap">
                                     <div className="menu_sub_sub_header">Salada</div>
-                                    <div>Grande: R$ 10,00</div>
-                                    <div>M&#233;dia: R$ 8,00</div>
-                                    <div>Pequena R$ 4,00</div>
+                                    <div>Grande: R$ 10,50</div>
+                                    <div>M&#233;dia: R$ 8,50</div>
+                                    <div>Pequena R$ 4,50</div>
                                 </div>
                             </div>
                         </div>
@@ -104,8 +104,8 @@ function Menu() {
                                 <div>Lata: R$ 6,00</div>
                                 <div>Cini Vidro 600ml: R$ 6,00</div>
                                 <div>Pet 600ml: R$ 7,00</div>
-                                <div>Coca Cola 1L: R$ 9,00</div>
-                                <div>Coca Cola 2L: R$ 12,00</div>
+                                <div>Coca Cola 1L: R$ 10,00</div>
+                                <div>Coca Cola 2L: R$ 14,00</div>
                                 <div>Cini 2L: R$ 10,00</div>
                                 <div>Guaran&#225; 2L: R$ 12,00</div>
                             </div>

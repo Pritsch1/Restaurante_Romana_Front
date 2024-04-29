@@ -50,8 +50,8 @@ function App() {
                     <Route path="/adm_signup" element={<AdminPublic> <AdminSignup /> </AdminPublic>} exact={true} />
                     <Route path="/adm_signin" element={<AdminPublic> <AdminSignin /> </AdminPublic>} exact={true} />
                     <Route element={<Protect />}>
-                        <Route path="/pedidos" element={<Orders />} exact={true} />
-                        <Route path="/menu" element={<DailyMenu />} exact={true} />
+                        {/*<Route path="/pedidos" element={<Orders />} exact={true} />*/}
+                        {/*<Route path="/menu" element={<DailyMenu />} exact={true} />*/}
                     </Route>
                     {/* Add a catch-all or error route here */}
                     {/*<Route path="*" element={<Error404 />} />*/}
